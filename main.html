@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BadTrip — Игровой процесс</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="game-body">
+
+    <header class="topbar">
+
+        <div class="stat-box">
+            <span>Игрок:</span>
+            <strong id="uiPlayerName">—</strong>
+        </div>
+
+        <div class="stat-box">
+            <span>День:</span>
+            <strong id="uiDay">1</strong>
+        </div>
+
+        <div class="stat-box">
+            <span>Осталось дней:</span>
+            <strong id="uiDaysLeft">30</strong>
+        </div>
+
+        <div class="stat-box">
+            <span>Деньги:</span>
+            <strong id="uiMoney">$0</strong>
+        </div>
+
+        <div class="stat-box">
+            <span>Цель:</span>
+            <strong id="uiGoal">$0</strong>
+        </div>
+
+        <div class="stat-box">
+            <span>Энергия:</span>
+            <strong id="uiEnergy">100</strong>
+        </div>
+
+        <div class="stat-box">
+            <span>Розыск:</span>
+            <div id="wantedStars" class="wanted-stars">
+
+                <span class="wanted-star">★</span>
+                <span class="wanted-star">★</span>
+                <span class="wanted-star">★</span>
+                <span class="wanted-star">★</span>
+                <span class="wanted-star">★</span>
+
+        </div>
+        </div>
+
+    </header>
+
+    <!-- ВКЛАДКИ -->
+    <div class="tabs">
+
+        <button class="tab-btn active" data-tab="shopTab">
+            Магазин
+        </button>
+
+        <button class="tab-btn" data-tab="labTab">
+            Лаборатория
+        </button>
+
+        <button class="tab-btn" data-tab="sellTab">
+            Сбыт
+        </button>
+
+    </div>
+
+    <!-- КОНТЕНТ ВКЛАДОК -->
+    <main class="tab-content-wrapper">
+
+        <section id="shopTab" class="tab-content active">
+
+            <div class="lab-banner">
+
+                <div>
+                    <h2>Модернизация: Подпольная Лаборатория</h2>
+                    <p>
+                        Позволяет использовать вкладку лаборатории
+                        и создавать более опасные вещества.
+                    </p>
+                    <strong>Цена: $500</strong>
+                </div>
+
+                <div id="labUpgradeContainer">
+
+                    <button id="unlockLabBtn" class="danger-btn" onclick="unlockLab()">
+                        Купить
+                    </button>
+
+                </div>
+
+            </div>
+
+            <h2 class="shop-title">Черный рынок</h2>
+
+            <div class="shop-list">
+
+                <!-- ТОВАР -->
+
+                <div class="shop-item">
+
+                    <img src="images/cannabis_seeds.png" alt="Семена конопли">
+
+                    <div class="shop-info">
+                        <h3>Семена конопли</h3>
+                        <p>Цена: $10</p>
+                        <p>
+                            На складе:
+                            <span id="stock-cannabis_seeds">0</span>
+                        </p>
+                    </div>
+
+                    <button onclick="buyItem('cannabis_seeds')">
+                        Купить 1 шт
+                    </button>
+
+                </div>
+
+                <!-- ТОВАР -->
+
+                <div class="shop-item">
+
+                    <img src="images/rolling_paper.png" alt="Бумага">
+
+                    <div class="shop-info">
+                        <h3>Бумага для самокруток</h3>
+                        <p>Цена: $2</p>
+                        <p>
+                            На складе:
+                            <span id="stock-rolling_paper">0</span>
+                        </p>
+                    </div>
+
+                    <button onclick="buyItem('rolling_paper')">
+                        Купить 1 шт
+                    </button>
+
+                </div>
+
+                <!-- ТОВАР -->
+
+                <div class="shop-item">
+
+                    <img src="images/coca_leaves.png" alt="Листья коки">
+
+                    <div class="shop-info">
+                        <h3>Листья коки</h3>
+                        <p>Цена: $30</p>
+                        <p>
+                            На складе:
+                            <span id="stock-coca_leaves">0</span>
+                        </p>
+                    </div>
+
+                    <button onclick="buyItem('coca_leaves')">
+                        Купить 1 шт
+                    </button>
+
+                </div>
+
+                <!-- ТОВАР -->
+
+                <div class="shop-item">
+
+                    <img src="images/mushroom_spores.png" alt="Споры грибов">
+
+                    <div class="shop-info">
+                        <h3>Споры грибов</h3>
+                        <p>Цена: $15</p>
+                        <p>
+                            На складе:
+                            <span id="stock-mushroom_spores">0</span>
+                        </p>
+                    </div>
+
+                    <button onclick="buyItem('mushroom_spores')">
+                        Купить 1 шт
+                    </button>
+
+                </div>
+
+                <!-- ТОВАР -->
+
+                <div class="shop-item">
+
+                    <img src="images/raw_morphine.png" alt="Морфий">
+
+                    <div class="shop-info">
+                        <h3>Морфий-сырец</h3>
+                        <p>Цена: $80</p>
+                        <p>
+                            На складе:
+                            <span id="stock-raw_morphine">0</span>
+                        </p>
+                    </div>
+
+                    <button onclick="buyItem('raw_morphine')">
+                        Купить 1 шт
+                    </button>
+
+                </div>
+
+                <!-- ТОВАР -->
+
+                <div class="shop-item">
+
+                    <img src="images/methyl_acid.png" alt="Кислота">
+
+                    <div class="shop-info">
+                        <h3>Метиловая кислота</h3>
+                        <p>Цена: $150</p>
+                        <p>
+                            На складе:
+                            <span id="stock-methyl_acid">0</span>
+                        </p>
+                    </div>
+
+                    <button onclick="buyItem('methyl_acid')">
+                        Купить 1 шт
+                    </button>
+
+                </div>
+
+                <!-- ТОВАР -->
+
+                <div class="shop-item">
+
+                    <img src="images/basic_chemistry_kit.png" alt="Набор химии">
+
+                    <div class="shop-info">
+                        <h3>Любительский набор химии</h3>
+                        <p>Цена: $15</p>
+                        <p>
+                            На складе:
+                            <span id="stock-basic_chemistry_kit">0</span>
+                        </p>
+                    </div>
+
+                    <button onclick="buyItem('basic_chemistry_kit')">
+                        Купить 1 шт
+                    </button>
+
+                </div>
+
+                <!-- ТОВАР -->
+
+                <div class="shop-item">
+
+                    <img src="images/student_chemistry_kit.png" alt="Набор химии">
+
+                    <div class="shop-info">
+                        <h3>Студенческий набор химии</h3>
+                        <p>Цена: $50</p>
+                        <p>
+                            На складе:
+                            <span id="stock-student_chemistry_kit">0</span>
+                        </p>
+                    </div>
+
+                    <button onclick="buyItem('student_chemistry_kit')">
+                        Купить 1 шт
+                    </button>
+
+                </div>
+
+                <!-- ТОВАР -->
+
+                <div class="shop-item">
+
+                    <img src="images/professional_chemistry_kit.png" alt="Набор химии">
+
+                    <div class="shop-info">
+                        <h3>Профессиональный набор химии</h3>
+                        <p>Цена: $120</p>
+                        <p>
+                            На складе:
+                            <span id="stock-professional_chemistry_kit">0</span>
+                        </p>
+                    </div>
+
+                    <button onclick="buyItem('professional_chemistry_kit')">
+                        Купить 1 шт
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="labTab" class="tab-content">
+
+            <h2 class="lab-title">Лаборатория</h2>
+
+            <!-- АКТИВНОЕ ПРОИЗВОДСТВО -->
+
+            <div class="production-section">
+
+                <h3>Текущее производство</h3>
+
+                <div id="productionQueue" class="production-queue">
+
+                    <p class="empty-production">
+                        Производство отсутствует.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- СПИСОК РЕЦЕПТОВ -->
+
+            <div id="recipesContainer" class="recipes-list">
+
+                <!-- TIER 1 -->
+
+                <div class="recipe-card">
+
+                    <img src="images/marijuana_joint.png" alt="Марихуана">
+
+                    <div class="recipe-info">
+                        <h3>Марихуана (самокрутка)</h3>
+                        <p>1 Семена + 1 Бумага</p>
+                        <p>Время: 2 дня</p>
+                    </div>
+
+                    <button onclick="startProduction('marijuana')">
+                        Запустить производство
+                    </button>
+
+                </div>
+
+                <div class="recipe-card">
+
+                    <img src="images/cocaine.png" alt="Кокаин">
+
+                    <div class="recipe-info">
+                        <h3>Очистка кокаина</h3>
+                        <p>1 Листья коки</p>
+                        <p>Время: 1 день</p>
+                    </div>
+
+                    <button onclick="startProduction('cocaine')">
+                        Запустить производство
+                    </button>
+
+                </div>
+
+                <div class="recipe-card">
+
+                    <img src="images/hallucinogenic_mushrooms.png" alt="Грибы">
+
+                    <div class="recipe-info">
+                        <h3>Выращивание грибов</h3>
+                        <p>1 Споры грибов</p>
+                        <p>Время: 3 дня</p>
+                    </div>
+
+                    <button onclick="startProduction('mushrooms')">
+                        Запустить производство
+                    </button>
+
+                </div>
+
+                <!-- TIER 2 -->
+
+                <div class="recipe-card lab-required">
+
+                    <img src="images/crack.png" alt="Крэк">
+
+                    <div class="recipe-info">
+                        <h3>Крэк</h3>
+                        <p>1 Кокаин + 1 Любительский набор</p>
+                        <p>Время: 1 день</p>
+                    </div>
+
+                    <button class="tier2-btn" data-lab-required="true" onclick="startProduction('crack')">
+                        Требуется Лаборатория
+                    </button>
+
+                </div>
+
+                <div class="recipe-card lab-required">
+
+                    <img src="images/amphetamine.png" alt="Амфетамин">
+
+                    <div class="recipe-info">
+                        <h3>Амфетамин</h3>
+                        <p>1 Студенческий набор</p>
+                        <p>Время: 1 день</p>
+                    </div>
+
+                    <button class="tier2-btn" data-lab-required="true" onclick="startProduction('amphetamine')">
+                        Требуется Лаборатория
+                    </button>
+
+                </div>
+
+                <div class="recipe-card lab-required">
+
+                    <img src="images/methamphetamine.png" alt="Метамфетамин">
+
+                    <div class="recipe-info">
+                        <h3>Метамфетамин</h3>
+                        <p>1 Студенческий набор + 1 Метиловая кислота</p>
+                        <p>Время: 2 дня</p>
+                    </div>
+
+                    <button class="tier2-btn" data-lab-required="true" onclick="startProduction('methamphetamine')">
+                        Требуется Лаборатория
+                    </button>
+
+                </div>
+
+                <div class="recipe-card lab-required">
+
+                    <img src="images/mephedrone.png" alt="Мефедрон">
+
+                    <div class="recipe-info">
+                        <h3>Мефедрон</h3>
+                        <p>1 Студенческий + 1 Любительский набор</p>
+                        <p>Время: 1 день</p>
+                    </div>
+
+                    <button class="tier2-btn" data-lab-required="true" onclick="startProduction('mephedrone')">
+                        Требуется Лаборатория
+                    </button>
+
+                </div>
+
+                <div class="recipe-card lab-required">
+
+                    <img src="images/heroin.png" alt="Героин">
+
+                    <div class="recipe-info">
+                        <h3>Героин</h3>
+                        <p>1 Морфий + 1 Студенческий набор</p>
+                        <p>Время: 2 дня</p>
+                    </div>
+
+                    <button class="tier2-btn" data-lab-required="true" onclick="startProduction('heroin')">
+                        Требуется Лаборатория
+                    </button>
+
+                </div>
+
+                <div class="recipe-card lab-required">
+
+                    <img src="images/oxycodone.png" alt="Оксикодон">
+
+                    <div class="recipe-info">
+                        <h3>Оксикодон</h3>
+                        <p>1 Морфий + 1 Профессиональный набор</p>
+                        <p>Время: 3 дня</p>
+                    </div>
+
+                    <button class="tier2-btn" data-lab-required="true" onclick="startProduction('oxycodone')">
+                        Требуется Лаборатория
+                    </button>
+
+                </div>
+
+                <div class="recipe-card lab-required">
+
+                    <img src="images/lsd.png" alt="ЛСД">
+
+                    <div class="recipe-info">
+                        <h3>ЛСД</h3>
+                        <p>1 Грибы + 1 Профессиональный набор</p>
+                        <p>Время: 3 дня</p>
+                    </div>
+
+                    <button class="tier2-btn" data-lab-required="true" onclick="startProduction('lsd')">
+                        Требуется Лаборатория
+                    </button>
+
+                </div>
+
+                <div class="recipe-card lab-required">
+
+                    <img src="images/fentanyl.png" alt="Фентанил">
+
+                    <div class="recipe-info">
+                        <h3>Фентанил</h3>
+                        <p>1 Морфий + все наборы химии</p>
+                        <p>Время: 2 дня</p>
+                    </div>
+
+                    <button class="tier2-btn" data-lab-required="true" onclick="startProduction('fentanyl')">
+                        Требуется Лаборатория
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="sellTab" class="tab-content">
+
+            <h2 class="sell-title">Сбыт продукции</h2>
+
+            <div id="marketContainer" class="market-container">
+
+                <!-- Генерируется через JS -->
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ЛОГ -->
+    <section class="log-section">
+
+        <h3>Журнал событий</h3>
+
+        <div id="gameLog" class="game-log">
+            <p>Игра началась...</p>
+        </div>
+
+    </section>
+
+    <!-- КНОПКА -->
+    <div class="bottom-panel">
+        <button id="nextDayBtn" class="main-btn">
+            Завершить день
+        </button>
+    </div>
+
+    <!-- ПЕРЕХОД ДНЯ -->
+
+    <div id="dayTransition" class="day-transition"></div>
+
+    <!-- ОБЛАВА -->
+
+    <div id="raidModal" class="modal hidden">
+
+        <div class="modal-content">
+
+            <h2>ПОЛИЦЕЙСКАЯ ОБЛАВА</h2>
+
+            <p>
+                Полиция вышла на ваш след.
+                Нужно срочно принимать решение.
+            </p>
+
+            <div class="raid-buttons">
+
+                <button onclick="payBribe()">
+                    Дать взятку
+                </button>
+
+                <button onclick="tryEscape()">
+                    Попробовать сбежать
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>

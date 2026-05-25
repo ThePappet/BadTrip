@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BadTrip — Главное меню</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="menu-body">
+
+    <div class="menu-container">
+        <h1 class="game-title">BADTRIP</h1>
+        <p class="subtitle">Антинаркотический экономический хоррор-симулятор</p>
+
+        <div class="menu-box">
+
+            <label>Имя игрока</label>
+            <input type="text" id="playerName" placeholder="Введите имя" maxlength="20" required>
+
+            <label>Уровень сложности</label>
+            <select id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium" selected>Medium</option>
+                <option value="hard">Hard</option>
+                <option value="endless">Endless</option>
+                <option value="custom">Custom</option>
+            </select>
+
+            <div id="customSettings" class="custom-settings hidden">
+                <label>Лимит дней</label>
+                <input type="number" id="customDays" placeholder="Например: 30">
+
+                <label>Цель по деньгам</label>
+                <input type="number" id="customGoal" placeholder="Например: 5000">
+            </div>
+
+            <button id="startGameBtn" class="main-btn">
+                Начать игру
+            </button>
+
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО -->
+    <div id="disclaimerModal" class="modal hidden">
+        <div class="modal-content">
+
+            <h2>Дисклеймер</h2>
+
+            <p>
+                ВНИМАНИЕ: Данная игра является художественным произведением,
+                несёт исключительно ознакомительный и развлекательный характер
+                и призвана продемонстрировать разрушительный характер
+                криминального мира.
+            </p>
+
+            <p>
+                Автор категорически осуждает употребление, производство
+                и распространение любых наркотических веществ.
+            </p>
+
+            <p class="danger-text">
+                Наркотики — это смертельный яд, уничтожающий жизни.
+                Помните: лёгких денег не бывает, а финал этого пути
+                всегда один — тюрьма или смерть.
+            </p>
+
+            <button id="confirmDisclaimer" class="danger-btn">
+                Я всё понял, подтверждаю своё согласие
+            </button>
+
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
